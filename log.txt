@@ -1,0 +1,17 @@
+commit 816431cf898b92aa3cecb61b5ce4f8dabdede98b
+Author: SangHyuk KIM <HenryKIM@SangHyuks-iMac-24.local>
+Date:   Sun Jun 26 21:04:07 2016 +1000
+
+    To textfile
+
+commit ee83594eb4fd98a68fbe2a4731714360827e2812
+Author: SangHyuk KIM <HenryKIM@SangHyuks-iMac-24.local>
+Date:   Sun Jun 26 02:26:59 2016 +1000
+
+    today's date and ascii arts
+
+commit b4574122a13e7f77c67be5c5764d484efde70595
+Author: SangHyuk KIM <HenryKIM@SangHyuks-iMac-24.local>
+Date:   Sun Jun 26 01:08:24 2016 +1000
+
+    Initial commit
