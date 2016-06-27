@@ -39,7 +39,7 @@ def product_data
      total_sales = total_sales(toy)
      print_total_sales(total_sales)
      
-     average = average_price_sold(total_sales, number_purchase_each)
+     average = average_price(total_sales, number_purchase_each)
      print_average_price_sold(average)
     
      discount = average_discount(retail_price,average)
@@ -47,14 +47,14 @@ def product_data
      
      rate = discount_rate(retail_price, discount)
      print_rate(rate)
-     $report_file.puts "------------------------------------------" 
+     dividor
   end
 end
 
 def brand_data
   brands = brand_list
   brands.each do |b|
-    $report_file.puts b
+    print_brand(b)
     total_stock = 0
     total_price = 0.0
     average_price = 0.0
@@ -63,18 +63,21 @@ def brand_data
     $products_hash["items"].each do |toy|
       if toy["brand"] == b
         n = n + 1
-        total_stock = total_stock + toy["stock"]
-        total_price = total_price + toy["full-price"].to_f
-        toy["purchases"].each do |p|
-          total_sales = total_sales + p["price"]
-        end
-      end
+        total_stock = stocks_brand(total_stock,toy["stock"])
+        total_price = total_price(total_price,toy)
+        total_sales = total_sales_brand(total_sales,toy)
+		  end
     end
     print_stocks_brand(total_stock)
-    print_average_price_brand(total_price, n)
+    average_price_brand = average_price(total_price, n)
+    print_average_price_brand(average_price_brand)
     print_total_brand(total_sales)
-    $report_file.puts "------------------------------------------"
+    dividor
   end
+end
+
+def dividor
+  $report_file.puts "-"*45
 end
 
 # Print "Sales Report" in ascii art
@@ -147,7 +150,7 @@ def print_total_sales(amount)
 end
 
 	# Calculate and print the average price the toy sold for
-def average_price_sold(total,number)
+def average_price(total,number)
   average_price = total / number
   return average_price
 end
@@ -198,16 +201,38 @@ def brand_list
   return brands
 end	
 
+def print_brand(brand)
+  $report_file.puts "brand: #{brand}"
+end
+
   # Count and print the number of the brand's toys we stock
+def stocks_brand(total_stock,stock)
+  return total_stock + stock
+end
+
 def print_stocks_brand(number)
   $report_file.puts "Number of stocks: #{number}"
 end
+
   # Calculate and print the average price of the brand's toys
-def print_average_price_brand(total, n)
-  average = total/n
+def total_price(sum_price,toy)
+  sum_price = sum_price + toy["full-price"].to_f
+  return sum_price
+end
+
+def print_average_price_brand(average)
   $report_file.puts "Average price: $#{average.round(2)}"
 end
+
 	# Calculate and print the total sales volume of all the brand's toys combined
+
+def total_sales_brand(total_sales,toy)
+  toy["purchases"].each do |p|
+    total_sales = total_sales + p["price"]
+  end
+  return total_sales
+end
+
 def print_total_brand(total_sales)
   $report_file.puts "Total sales: $#{total_sales.round(2)}"
 end
