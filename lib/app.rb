@@ -6,11 +6,15 @@ def start
   create_report # create the report!
 end
 
+def close_file
+  $report_file.close
+end
+
 def setup_files
   path = File.join(File.dirname(__FILE__), '../data/products.json')
   file = File.read(path)
   $products_hash = JSON.parse(file)
-  $report_file = File.new("report.txt", "w+")
+  $report_file = File.new("../report.txt", "w+")
 end
 
 def create_report
@@ -207,5 +211,7 @@ end
 def print_total_brand(total_sales)
   $report_file.puts "Total sales: $#{total_sales.round(2)}"
 end
-setup_files
-create_report
+
+start
+
+close_file
